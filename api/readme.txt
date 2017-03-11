@@ -1,15 +1,15 @@
 Por favor leiam.
 
-Segue uma base para a criação da API, em baixo poderão encontrar a esturura das diretorias do projeto
-Peço especial atenção para que comentem tudo, comentarios em inglês são a descrição do código e 
-	comentários em português são notas para que todos os envolvidos percebam o que está feito, e falta 
-	fazer. Todos os ficheiros .go têm um cabeçalho "AGENDA", servirá para nos orientarmos, peço-vos que 
-	sigam o padrão. Cada um fica responsável de apagar os seus comentários, caso alguém ache que um 
-	comentário não faz sentido comunique ao envolvido mas NÃO APAGUE sem o consentimento dele.
+Segue uma base para a criaÃ§Ã£o da API, em baixo poderÃ£o encontrar a esturura das diretorias do projeto
+PeÃ§o especial atenÃ§Ã£o para que comentem tudo, comentarios em inglÃªs sÃ£o a descriÃ§Ã£o do cÃ³digo e 
+	comentÃ¡rios em portuguÃªs sÃ£o notas para que todos os envolvidos percebam o que estÃ¡ feito, e falta 
+	fazer. Todos os ficheiros .go tÃªm um cabeÃ§alho "AGENDA", servirÃ¡ para nos orientarmos, peÃ§o-vos que 
+	sigam o padrÃ£o. Cada um fica responsÃ¡vel de apagar os seus comentÃ¡rios, caso alguÃ©m ache que um 
+	comentÃ¡rio nÃ£o faz sentido comunique ao envolvido mas NÃƒO APAGUE sem o consentimento dele.
 
-Já retirei os repositórios .git que se encontravam nas bibliotecas da pasta github.com para que baste descarregar ~
-	a pasta "api" e correr o executável main.exe, os dados que introduzi na struct para codificar em JSON 
-	são meramente exemplificativos.
+JÃ¡ retirei os repositÃ³rios .git que se encontravam nas bibliotecas da pasta github.com para que baste descarregar ~
+	a pasta "api" e correr o executÃ¡vel main.exe, os dados que introduzi na struct para codificar em JSON 
+	sÃ£o meramente exemplificativos.
 
 O Projeto encontra-se organizdo da seguinte forma:
 
@@ -18,22 +18,28 @@ O Projeto encontra-se organizdo da seguinte forma:
 	|	bin
 	|	|	main.exe
 	|	pkg
-	|	|	windows_amd64 (compilação de bibliotecas)
+	|	|	windows_amd64 (compilaÃ§Ã£o de bibliotecas)
 	|	src
 	|	|	github.com
 	|	|	|	gorilla	(biblioteca necessaria para roteamento)
-	|	|	|	go-sql-driver (biblioteca necessária para ligação à base de dados)
+	|	|	|	go-sql-driver (biblioteca necessÃ¡ria para ligaÃ§Ã£o Ã  base de dados)
 	|	|	main
 	|	|	|	controller.go (conjunto de handlers associados a uma rota)
-	|	|	|	dbconnection.go (funções de manipulação de dados da base de dados)
-	|	|	|	main.go (arranque do serviço)
-	|	|	|	model.go (estruturas representantes da das views, necessárias para serialização JSON)
-	|	|	|	router.go (definição das rotas)
+	|	|	|	dbconnection.go (funÃ§Ãµes de manipulaÃ§Ã£o de dados da base de dados)
+	|	|	|	main.go (arranque do serviÃ§o)
+	|	|	|	model.go (estruturas representantes da das views, necessÃ¡rias para serializaÃ§Ã£o JSON)
+	|	|	|	router.go (definiÃ§Ã£o das rotas)
 
-Adotei uma organização o mais aproximado com MVC para facilitar a compreensão do código, 
-e separei em ficheiros para evitar conflitos de commits e assim podermos render melhor o trabalho.
+Adotei uma organizaÃ§Ã£o dos ficheiros .go o mais aproximado com MVC para facilitar a compreensÃ£o do cÃ³digo e 
+evitar conflitos de commits para assim podermos render melhor o trabalho.
+A organizaÃ§Ã£o das pastas foi semelhante Ã  proposta pelo Rui Marques, e o roteamento Ã© parecido ao proposto pelo
+Daniel Casimiro, apenas estÃ¡ a ser usada outra framework (mux em vez de gin), penso que Ã© mais facil de aprender e tem
+mais documentaÃ§Ã£o.
+Procurei o mais simples possivel.
 
-Comandos necessários no prompt:
+Falta as bases para autenticaÃ§Ã£o!!
+
+Comandos necessÃ¡rios no prompt:
 	> go env
 	> set GOPATH={absolute_path}\api
 	> set GOBIN={absolute_path}\api\bin
@@ -41,11 +47,7 @@ Comandos necessários no prompt:
 	> cd {absolute_path}\api\bin
 	> main.exe
 
-comandos necessários no git bash (opcional para importar bibliotecas):
+comandos necessÃ¡rios no git bash (opcional para importar bibliotecas):
 	$ export GOPATH={absolute_path}\api
 	$ export GOBIN={absolute_path}\api\bin
 	$ go get {repository}
-
-Penso que da forma que a diretoria foi organizada será de facil compreenssão a todos e o código 
-procurei o mais simples possivel.
-Comentários deixem em baixo ou no SLACK
