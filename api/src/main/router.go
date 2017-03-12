@@ -21,7 +21,7 @@
         nota: as que têm um X são as que já estão definidas.
         
     2) É necessário configurar o router de forma a permitir autenticação: 
-        Diogo Mendes - para isso aconselho o uso das librarias em github.com/dgrijalva/jwt-go ou 
+        Diogo Mendes - para isso aconselho o uso das biliotecas em github.com/dgrijalva/jwt-go ou 
             github.com/dvsekhvalnov/jose2go
 ------------------------------------------------------------------------------------------*/
 
