@@ -28,12 +28,9 @@ func main(){
 	g := gin.Default();
 
 	// JWT middleware -  api security
-	//change this
     authMiddleware := &jwt.GinJWTMiddleware{
-        Realm:      "Change This",
-		///////////////////////////////////////////////////Change This
-        Key:        []byte("Change This"), //Change This
-		///////////////////////////////////////////////////
+        Realm:      "API_Projectary",
+        Key:        []byte("VerySecureKeyDontForgetToChangeThisWhenInProduction"),
         Timeout:    time.Hour,
         MaxRefresh: time.Hour,
         Authenticator: func(userId string, password string, c *gin.Context) (string, bool) {
