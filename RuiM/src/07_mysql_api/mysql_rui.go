@@ -1,7 +1,5 @@
 package main
 
-
-
 import (
 	"bytes"
 	"database/sql"
@@ -14,7 +12,8 @@ import (
 
 
 func main() {
-	db, err := sql.Open("mysql", "root:mhbnxuvb@tcp(127.0.0.1:3306)/apitest")
+	//db, err := sql.Open("mysql", "root:mhbnxuvb@tcp(127.0.0.1:3306)/apiTest")
+	db, err := sql.Open("mysql", "root:mhbnxuvb@localhost/apiTest")
 	if err != nil {
 		fmt.Print(err.Error())
 	}
@@ -27,10 +26,9 @@ func main() {
 	}
 	
 	type Person struct {
-		Id         int
+		id         int
 		nome string
 		apelido  string		
-		criado string
 	}
 	
 	router := gin.Default()
@@ -43,8 +41,8 @@ func main() {
 			result gin.H
 		)
 		id := c.Param("id")
-		row := db.QueryRow("select id, nome, apelido, criado from dados1 where id = ?;", id)
-		err = row.Scan(&person.Id, &person.nome, &person.apelido, &person.criado)
+		row := db.QueryRow("select id, nome, apelido from dados1 where id = ?;", id)
+		err = row.Scan(&person.id, &person.nome, &person.apelido)
 		if err != nil {
 			// If no results send null
 			result = gin.H{
@@ -58,6 +56,7 @@ func main() {
 			}
 		}
 		c.JSON(http.StatusOK, result)
+		//fmt.Print(result)
 	})
 	
 	// GET all persons
@@ -66,12 +65,12 @@ func main() {
 			person  Person
 			persons []Person
 		)
-		rows, err := db.Query("select id, nome, apelido, criado from dados1;")
+		rows, err := db.Query("select id, nome, apelido from dados1;")
 		if err != nil {
 			fmt.Print(err.Error())
 		}
 		for rows.Next() {
-			err = rows.Scan(&person.Id, &person.nome, & person.apelido, &person.criado )
+			err = rows.Scan(&person.id, &person.nome, & person.apelido )
 			persons = append(persons, person)
 			if err != nil {
 				fmt.Print(err.Error())
@@ -89,13 +88,12 @@ func main() {
 		var buffer bytes.Buffer
 		nome := c.PostForm("nome")
 		apelido := c.PostForm("apelido")
-		criado :=c.PostForm("criado")
-		stmt, err := db.Prepare("insert into dados1 (nome, apelido, criado) values(?,?,?);")
+		stmt, err := db.Prepare("insert into dados1 (nome, apelido) values(?,?);")
 		if err != nil {
 			fmt.Print(err.Error())
 		}
 		
-		_, err = stmt.Exec(nome, apelido, criado)
+		_, err = stmt.Exec(nome, apelido)
 		if err != nil {
 			fmt.Print(err.Error())
 
@@ -105,8 +103,6 @@ func main() {
 		buffer.WriteString(nome)
 		buffer.WriteString(" ")
 		buffer.WriteString(apelido)
-		buffer.WriteString(" ")
-		buffer.WriteString(criado)
 		defer stmt.Close()
 		name := buffer.String()
 		c.JSON(http.StatusOK, gin.H{
@@ -136,12 +132,11 @@ func main() {
 		id := c.Query("id")
 		nome := c.PostForm("nome")
 		apelido := c.PostForm("apelido")
-		criado := c.PostForm("criado")
-		stmt, err := db.Prepare("update person set nome= ?, apelido= ?, criado= ? where id= ?;")
+		stmt, err := db.Prepare("update person set nome= ?, apelido= ? where id= ?;")
 		if err != nil {
 			fmt.Print(err.Error())
 		}
-		_, err = stmt.Exec(nome, apelido, criado, id)
+		_, err = stmt.Exec(nome, apelido, id)
 		if err != nil {
 			fmt.Print(err.Error())
 		}
@@ -149,8 +144,6 @@ func main() {
 		buffer.WriteString(nome)
 		buffer.WriteString(" ")
 		buffer.WriteString(apelido)
-		buffer.WriteString(" ")
-		buffer.WriteString(criado)
 		defer stmt.Close()
 		name := buffer.String()
 		c.JSON(http.StatusOK, gin.H{
