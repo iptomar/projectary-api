@@ -1,5 +1,5 @@
 set GOPATH=%cd%
 Set GOBIN=%GOPATH%\bin
 
-cd %GOPATH%\src
+cd %GOPATH%\src\main
 CMD
