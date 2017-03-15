@@ -11,6 +11,7 @@ import (
     "time"
 	"os"
   _ "github.com/go-sql-driver/mysql"
+	"main/db"
 )
 
 func main(){
@@ -19,6 +20,10 @@ func main(){
 	if port == "" {
         port = "80"
     }
+	
+	db.DBConnect(); 
+	db.DBPing();
+	
 	//Setups Gin as debug mode - nice to find bugs
 	gin.SetMode(gin.DebugMode); 
 	//Setups Gin as release mode
@@ -74,8 +79,8 @@ func main(){
 	}
 	
 	//API routes definition
-	api := g.Group("/")
-	api.Use(authMiddleware.MiddlewareFunc())
+	api := g.Group("/api")
+	//api.Use(authMiddleware.MiddlewareFunc())
 	{	
 		//Student Routes
 		//1: POST: http://127.0.0.1/api/student
@@ -129,7 +134,7 @@ func main(){
 		teacher.PUT("/", controllers.UpdateTeacher) //2: Update a teacher
 		}		
 	}
-	
+
 	//Starts Gin
 	g.Run(":"+port)
 }
