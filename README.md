@@ -58,7 +58,7 @@ By [@diogosantosmendes](https://github.com/diogosantosmendes)
     |	|	golang.org
     |	|		[Subfolders with required libraries]
     |	|	gopkg.in				
-    |	|	| [Subfolders with required libraries]
+    |	|	|   [Subfolders with required libraries]
     |	|	|
     |	|	main
     |	|	|	model       [Data Model]
