@@ -7,6 +7,8 @@
  a partir do sistema operativo Host e do Guest.
 -executar o comando "vagrant up" dentro da pasta da VagrantFile, irá sacar a maquina e configurá-la de acordo com o ficheiro
 -para aceder por ssh, fazer "vagrant ssh" e terá acesso à shell da máquina (é necessário o cygwin instalado, com o putty não dá)
+-em shell do ubuntu, a pasta partilhada com o SO do host está em /vagrant (nao confundir com /home/vagrant). Esta pasta é a mesma onde está
+ a VagrantFile e tudo o que for aqui criado está sincronizado entre a máquina virtual e a pasta no host
 -para sair da shell fazer "exit" na shell da máquina virtual
 -para parar a máquina virtual, depois de ter saído da shell para a linha de comandos do Sistema operativo host, fazer "vagrant halt"
 -se quiser "destruir" a máquina virtual (por exemplo pra libertar espaço), basta fazer "vagrant destroy". A VagrantFile continua na pasta e
