@@ -6,11 +6,11 @@ import (
 		_ "github.com/go-sql-driver/mysql"
 )
 
-var Dbase *sql.DB 
+var Dbase *sql.DB
 
 func DBConnect(){
 	var err error
-	Dbase,err = sql.Open("mysql","pjapi:@/projetary")
+	Dbase,err = sql.Open("mysql","root:@/projectary")
 	if err != nil{
 		fmt.Printf("[DB-Debug] Error creating connection: %s\n", err.Error())
 	} else{
@@ -30,4 +30,3 @@ func DBPing() {
 		}
 	}
 }
-
