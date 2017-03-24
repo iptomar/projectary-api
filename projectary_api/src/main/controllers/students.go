@@ -6,11 +6,17 @@ import (
 	"fmt"
 	"net/http"
 	"main/models"
+	"encoding/json"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func CreateStudent(g *gin.Context) {
-// The futur code
+	decoder:= json.NewDecoder(g.Request.Body)
+	var student models.Student
+	err:= decoder.Decode(&user)
+	if(err!=nil){
+		log.Print(err.Error())
+	}
 }
 
 func ApproveStudent(g *gin.Context) {
