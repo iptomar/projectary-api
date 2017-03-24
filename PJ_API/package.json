@@ -1,0 +1,25 @@
+{
+  "name": "PJapi",
+  "version": "0.0.1",
+  "description": "ProjectaryAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "backend"
+  ],
+  "author": "IPT",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "colors": "^1.1.2",
+    "express": "^4.15.0",
+    "helmet": "^3.4.1",
+    "install": "^0.8.7",
+    "jwt-simple": "^0.5.1",
+    "mysql": "^2.13.0",
+    "npm": "^4.3.0"
+  }
+}
