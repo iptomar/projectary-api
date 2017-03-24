@@ -32,7 +32,7 @@ var users = {
  //Not Working
  delete: function (req, res) {
 	 
-	
+ },
 };
  
 module.exports = users;
