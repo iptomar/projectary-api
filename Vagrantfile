@@ -37,7 +37,9 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update -q
 apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common
 
-
+cd /vagrant
+wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
+sudo mysql < projectary-bd-dump.sql
 SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -48,13 +50,6 @@ Vagrant.configure("2") do |config|
 	# nome da box a utilizar. Tem de ser o mesmo que utilizamos com o comando "vagrant box add hasicorp/precise64
 	#config.vm.box="ubuntu/trusty64"
 	config.vm.box="ubuntu/xenial64"
-	#config.ssh.username = "ubuntu"
-	#config.ssh.password = ""
-	#master.vm.box = "ubuntu/xenial64"
-	#master.vm.hostname = "master"
-	#master.vm.network :private_network, ip: "127.0.0.1"
-	#config.ssh.insert_key = true
-	#config.ssh.forward_agent = true
 	# especificar forçando, a versao da box 
 	# config.vm.box_version="1.1.0"
 	# tambem se pode especificar o url da box usando o comando
