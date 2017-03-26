@@ -1,7 +1,7 @@
 {
-  "name": "PJapi",
+  "name": "projectari-api",
   "version": "0.0.1",
-  "description": "ProjectaryAPI",
+  "description": "Projectary API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,12 +15,16 @@
   "dependencies": {
     "body-parser": "^1.17.0",
     "colors": "^1.1.2",
-    "express": "^4.15.0",
+    "express": "^4.15.2",
     "helmet": "^3.4.1",
     "install": "^0.8.7",
     "jwt-simple": "^0.5.1",
     "mysql": "^2.13.0",
     "npm": "^4.3.0",
+<<<<<<< Updated upstream
 	"bcrypt": "^1.0.2"
+=======
+    "bcrypt": "^1.0.2"
+>>>>>>> Stashed changes
   }
 }

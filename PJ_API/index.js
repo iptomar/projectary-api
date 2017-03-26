@@ -1,29 +1,13 @@
 // server.js
 // BASE SETUP
 // =============================================================================
-// call the packages we need
-var mysql = require('mysql');
 // define our app using express
 var express = require('express');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var colors = require('colors');
-
-//mongo client
-
-//connect to db
-
-var pool  = mysql.createPool({
-  connectionLimit : 100,
-  host     : 'localhost',
-  user     : 'api',
-  password : 'apiUsr',
-  database : 'api'
-});
-
-pool.on('connection', function (connection) {
-	console.log("Mysql".cyan+" database connected ...".green);
-});
+// Database
+var pool = require('./app/data/db');
 
 // call express
 var app = express();
@@ -45,9 +29,9 @@ var port = process.env.PORT || 8080;
 // REGISTER OUR ROUTES -------------------------------
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/* will be checked for the token.
-// Any URL's that do not follow the below pattern should be avoided unless you 
+// Any URL's that do not follow the below pattern should be avoided unless you
 // are sure that authentication is not needed
-app.all('/api/*',[require('./app/auth/valRequest')]);
+// app.all('/api/*',[require('./app/auth/valRequest')]);
 
 // all of our routes will be prefixed with /
 app.use('/', require('./app/routes/routes'));
