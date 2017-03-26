@@ -1,14 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-BOX_NAME = ENV['BOX_NAME'] || "ubuntu/xenial64"
-SSH_PRIVKEY_PATH = ENV["SSH_PRIVKEY_PATH"]
-
 $script = <<SCRIPT
 user="$1"
 if [ -z "$user" ]; then
     user=vagrant
 fi
+
+
 
 apt-get update -q
 apt-get install -q -y apt-transport-https ca-certificates git
@@ -38,22 +37,30 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update -q
 apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common
 
+cd /vagrant
+wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
+sudo mysql < projectary-bd-dump.sql
 SCRIPT
 
-Vagrant::Config.run do |config|
-  config.vm.box = BOX_NAME
-
-  if SSH_PRIVKEY_PATH
-      config.ssh.private_key_path = SSH_PRIVKEY_PATH
-  end
-
-  config.ssh.forward_agent = true
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+	# nome da box a utilizar. Tem de ser o mesmo que utilizamos com o comando "vagrant box add hasicorp/precise64
+	#config.vm.box="ubuntu/trusty64"
+	config.vm.box="ubuntu/xenial64"
+	# especificar forçando, a versao da box 
+	# config.vm.box_version="1.1.0"
+	# tambem se pode especificar o url da box usando o comando
+	# config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+	# mais boxes em https://atlas.hashicorp.com/boxes/search?_ga=1.250320517.2055987266.1489777101
+	
+	## override.vm.provision :shell, path:"ficheiro.sh" (corre um ficheiro bash de nome ficheiro.sh)
+	config.vm.provider :virtualbox do |vb, override|
+	override.vm.provision :shell, :inline => $script
+	## configura um reencaminhamento de portas da porta 80 para a 4567 do host
+	#config.vm.network :forwarded_port, guest: 80, host:4567
+	end
 end
-
-Vagrant::VERSION >= "1.1.0" and Vagrant.configure("2") do |config|
-  config.vm.provider :virtualbox do |vb, override|
-    override.vm.provision :shell, :inline => $script
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-  end
-end
+  
