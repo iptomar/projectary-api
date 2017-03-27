@@ -2,9 +2,10 @@
   "name": "projectari-api",
   "version": "0.0.1",
   "description": "Projectary API",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node main.js"
   },
   "keywords": [
     "api",
@@ -21,10 +22,6 @@
     "jwt-simple": "^0.5.1",
     "mysql": "^2.13.0",
     "npm": "^4.3.0",
-<<<<<<< Updated upstream
 	"bcrypt": "^1.0.2"
-=======
-    "bcrypt": "^1.0.2"
->>>>>>> Stashed changes
   }
 }

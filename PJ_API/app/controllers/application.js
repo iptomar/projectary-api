@@ -1,4 +1,4 @@
-var project = {
+var application = {
 
   /* POST: http://127.0.0.1/api/application
   *
@@ -29,4 +29,4 @@ var project = {
 	},
 };
 
-module.exports = project;
+module.exports = application;

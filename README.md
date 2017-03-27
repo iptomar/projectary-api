@@ -6,20 +6,15 @@ Projectary API
 The database can be found [here](https://github.com/iptomar/projectary-bd)
 
 ## Installation
-By [@diogosantosmendes](https://github.com/diogosantosmendes) && [@secprog](https://github.com/secprog) <br>
+
 ```bash
-$ go env
-$ set GOPATH={ABSOLUTE_PATH}\projectary_api
-$ set GOBIN={ABSOLUTE_PATH}\projectary_api\bin
-$ cd {ABSOLUTE_PATH}\projectary_api\src\main
-$ go install
-$ go run main.go or cd ../../bin && main.exe
+$ cd {ABSOLUTE_PATH}\PJ_API
+$ npm install 
 ```
-Might be useful
+#Start API Server
 ```bash
-$ export GOPATH={ABSOLUTE_PATH}\projectary_api
-$ export GOBIN={ABSOLUTE_PATH}\projectary_api\bin
-$ go get {repository}
+$ cd {ABSOLUTE_PATH}\PJ_API
+$ npm start 
 ```
 
 ## Methods
@@ -44,25 +39,19 @@ $ go get {repository}
 |GET | /APPLICATION/:ID | [TEACHER] | Get a specific application list |
 
 ## Structure
-By [@diogosantosmendes](https://github.com/diogosantosmendes)
 
-    projectary_api
-    |	readme.txt
-    |	bin
-    |	| main.exe [Compiled libraries]
-    |	pkg
-    |	|	windows_amd64 [Compiled libraries]
-    |	src
-    |	|	github.com
+    PJ_API
+    |	
+    |	main.js [Main of Project]
+    |	package.json [Project Configurations and Dependencies]
+    |	node_modules
     |	|		[Subfolders with required libraries]
-    |	|	golang.org
-    |	|		[Subfolders with required libraries]
-    |	|	gopkg.in				
-    |	|	|   [Subfolders with required libraries]
-    |	|	|
-    |	|	main
-    |	|	|	model       [Data Model]
-    |	|	|	controllers [Routes with code implementation]
-    |	|	|
-    |	|	|	main.go     [Method routes and main code]
-    |	|	|
+    |	app
+    |	|	controllers
+    |	|		[Routes Implementation]
+    |	|	auth
+    |	|		[User Authentication and Security Implementation]
+    |	|	data				
+    |	|	    [Mysql Connection Definition and Connection Pool]
+    |	|	routes
+    |	|		[Routes Definition]
