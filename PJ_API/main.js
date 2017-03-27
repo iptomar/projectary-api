@@ -26,15 +26,19 @@ app.use(function(req,res,next){
 // set our port
 var port = process.env.PORT || 8080;
 
-// REGISTER OUR ROUTES -------------------------------
+// all of our public routes will be prefixed with /
+app.use('/',[require('./app/routes/routesEveryone')]);
+//others prefixed with /api 
+
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/* will be checked for the token.
 // Any URL's that do not follow the below pattern should be avoided unless you
 // are sure that authentication is not needed
-// app.all('/api/*',[require('./app/auth/valRequest')]);
+app.use('/api',[require('./app/auth/valRequest'), require('./app/routes/routesSome')]);//-->Comment this if you want to bypass
 
-// all of our routes will be prefixed with /
-app.use('/', require('./app/routes/routes'));
+//bypass authentication && authorization
+//app.use('/api',[require('./app/routes/routesSome')]); --> uncomment this if you want to bypass
+
 
 // START THE SERVER
 // =============================================================================

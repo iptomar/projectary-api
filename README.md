@@ -52,6 +52,6 @@ $ npm start
     |	|	auth
     |	|		[User Authentication and Security Implementation]
     |	|	data				
-    |	|	    [Mysql Connection Definition and Connection Pool]
+    |	|		[Mysql Connection Definition and Connection Pool]
     |	|	routes
     |	|		[Routes Definition]

@@ -12,7 +12,7 @@ var teacher = {
     var email = req.body.email || '';
 
     if (!username || !password || !email)
-      return res.status(401).json("Invalid credentials");
+      res.status(401).json("Invalid credentials");
     // First let's check if the user already exists
 
 

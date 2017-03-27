@@ -3,39 +3,28 @@ var bcrypt = require('bcrypt');
 var db = require('../data/db');
 
 var auth = {
-
   /*
   * User Login
   */
   loginUser: function(req, res) {
-    // Receive the post
+    // Receive the data that is on body
     var username = req.body.username || '';
     var password = req.body.password || '';
-
     if (!username || !password)
-      return res.status(401).json("Invalid credentials");
+	{
+	  res.status(401).json({error:"Invalid credentials"});
+      return;
+	}
 
-    // Check if the user exists
-    req.maria.query('SELECT id, username, password FROM users WHERE username = ? AND locked = 0 AND active = 1',username, function(err, rows){
-      if (err)
-        return res.status(500).json(err);
-
-      // If the query returns less than one result
-      if (rows.length < 1)
-        return res.status(401).json("Invalid credentials");
-
-      //Let's check the password
-      var resultado = bcrypt.compareSync(password, rows[0].password);
-      if (!resultado)
-        return res.status(401).json("Invalid credentials");
-
-      // If it came here, the user exists and the password is ok, give the token
-      //var dbUserObj = JSON.parse(JSON.stringify(rows[0]));
-      //res.status(200).json(genToken(dbUserObj));
-
-      //ToDo: insert user role
-      res.status(200).json(genToken(rows[0].username));
-    });
+	// Fire a query to your DB and check if the credentials are valid
+    var dbUserObj = auth.validate(username, password, req);
+    if (!dbUserObj) { 
+		// If authentication fails, we send a 401 back
+		res.status(401).json({error:"Invalid credentials"});
+      return;
+	}else {
+		res.json(genToken(dbUserObj));
+	}
   },
 
 
@@ -43,29 +32,51 @@ var auth = {
   * Refresh Token
   */
   refreshToken: function(req, res) {
-
+	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'] || req.headers['authorization'];
+	if (token) {
+    try {
+      var decoded = jwt.decode(token, require('../auth/secret')());
+	  //more validation need
+		  if(!decoded.user.name || !decoded.user.token || !decoded.exp)
+		  {
+			res.status(401).json({error: 'Invalid Token'});  
+		  }else {
+			  if (decoded.exp <= Date.now()) {
+				res.status(401).json({error: 'Token Expired'});
+			  }else {
+				  var dbUser = auth.validate(decoded.user.name, decoded.user.token, req);
+				  if (!dbUser) { // If authentication fails, we send a 401 back
+					console.log("[Renewing Token]: Attack attempt detected!".red);
+					res.status(401).json({error: "Attack attempt detected!"});
+				  }else {
+					  res.json(genToken(dbUser));	  
+				  }
+			  }
+			}
+		}catch (err) {
+		  res.status(401).json({error: 'Invalid Token'});
+		}
+	}
   },
 
-  validate: function(username, req){
-  //db from /data/db
-  db.query('SELECT id, username, password FROM users WHERE username = ? AND locked = 0 AND active = 1',username, function(err, rows){
-    if (err)
-      return null;
+  //TODO:
+  validate: function(username, password, req){
+		var db = req.maria;
+			db.getConnection(function(err, connection) {
+			  // Use the connection
+			  connection.query('SELECT 1+1', function (error, results, fields) {
+				// And done with the connection.
+				connection.release();
 
-    // If the query returns less than one result
-    if (rows.length < 1)
-      return null;
+				// Handle error after the release.
+				if (error) throw error;
 
-      //data.c = JSON.parse(JSON.stringify(rows[0]));
-      //console.log("data.c: ",data.c);
-      //return JSON.parse(JSON.stringify(rows[0]));
-    //  console.log("retornei o callback: ",JSON.parse(JSON.stringify(rows[0])));
-    //  callback(null,JSON.parse(JSON.stringify(rows[0])));
-    });
-    //console.log("data.c imp: ",data.c);
-    return 'admin'; //bypass
+				// Don't use the connection here, it has been returned to the pool.
+			  });
+		});
+		//Bypass hack
+		return { "name": "123","token": "99999"};
   },
-
 
 }
 
@@ -74,7 +85,7 @@ function genToken(user) {
   var expires = expiresIn(1); // 1 day
   var token = jwt.encode({
     exp: expires,
-	   user: user
+	user: user
   }, require('../auth/secret')());
 
   return {
