@@ -11,7 +11,7 @@ The database can be found [here](https://github.com/iptomar/projectary-bd)
 $ cd {ABSOLUTE_PATH}\PJ_API
 $ npm install 
 ```
-#Start API Server
+## Start API Server
 ```bash
 $ cd {ABSOLUTE_PATH}\PJ_API
 $ npm start 
