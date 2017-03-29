@@ -1,5 +1,11 @@
-.vagrant
-*.log
-npm-debug.log
+# Modules
 node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Other
 .DS_Store
+.vagrant
