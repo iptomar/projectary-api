@@ -4,7 +4,7 @@ var pool  = mysql.createPool({
   host     : 'localhost',
   user     : 'root2',
   password : '',
-  database : 'projetary'
+  database : 'projectary'
 });
 
 pool.on('connection', function (connection) {

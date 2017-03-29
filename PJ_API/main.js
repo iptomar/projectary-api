@@ -37,7 +37,7 @@ app.use('/',[require('./app/routes/routesEveryone')]);
 app.use('/api',[require('./app/auth/valRequest'), require('./app/routes/routesSome')]);//-->Comment this if you want to bypass
 
 //bypass authentication && authorization
-//app.use('/api',[require('./app/routes/routesSome')]); --> uncomment this if you want to bypass
+//app.use('/api',[require('./app/routes/routesSome')]); //--> uncomment this if you want to bypass
 
 
 // START THE SERVER
