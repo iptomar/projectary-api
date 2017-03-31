@@ -1,7 +1,7 @@
 var jwt = require('jwt-simple');
 var bcrypt = require('bcrypt');
 var db = require('../data/db');
-
+var async = require('async')
 var auth = {
   /*
    * User Login
@@ -11,25 +11,18 @@ var auth = {
     var username = req.body.username || '';
     var password = req.body.password || '';
     if (!username || !password) {
-      res.status(401).json({
-        error: "Invalid credentials"
-      });
-      return;
+     return res.status(401).json({ error: "Invalid credentials"});
     }
 
     // Fire a query to your DB and check if the credentials are valid
-    var dbUserObj = auth.validate(username, password, req);
-    if (!dbUserObj) {
-      // If authentication fails, we send a 401 back
-      res.status(401).json({
-        error: "Invalid credentials"
-      });
-      return;
-    } else {
-      res.json(genToken(dbUserObj));
-    }
+    auth.validate(username, password, req, function(results) {
+    	if (!results)
+    		return res.status(401).json({
+    			error: "Invalid credentials"
+    		});
+    		res.json(genToken(results));
+    });
   },
-
 
   /*
    * Refresh Token
@@ -50,15 +43,10 @@ var auth = {
               error: 'Token Expired'
             });
           } else {
-            var dbUser = auth.validate(decoded.user.name, decoded.user.token, req);
-            if (!dbUser) { // If authentication fails, we send a 401 back
-              console.log("[Renewing Token]: Attack attempt detected!".red);
-              res.status(401).json({
-                error: "Attack attempt detected!"
-              });
-            } else {
-              res.json(genToken(dbUser));
-            }
+            auth.validate(decoded.user.name, decoded.user.token, req, function(results){
+			if(!results) return res.status(401).json({error:"Invalid User"});
+				res.json(genToken(results));
+			});
           }
         }
       } catch (err) {
@@ -72,6 +60,7 @@ var auth = {
   //TODO:
 	validate: function(username, password, req, mcallback){
 		var db = req.maria;
+		
 		async.waterfall([
 		  function(callback) {
 			db.getConnection(function(err, connection) {
@@ -81,18 +70,15 @@ var auth = {
 				}
 				connection.release();
 				callback(err, rows);
-
 			  });
 			});
-
 		}
-	  ], function(err, result) {
-		  if (err || !result)
-			return res.json({status:"NOK", error:"Invalid data"});
-
+		], function(err, result) {
+		  if (err || !result) return res.json({status:"NOK", error:"Invalid data"});
 		  console.log("result: ",result);
+		  return mcallback(result);
 		});
-		return mcallback(result);
+	
 	},
 };
 
