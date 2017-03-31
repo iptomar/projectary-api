@@ -4,88 +4,104 @@ var db = require('../data/db');
 
 var auth = {
   /*
-  * User Login
-  */
+   * User Login
+   */
   loginUser: function(req, res) {
     // Receive the data that is on body
     var username = req.body.username || '';
     var password = req.body.password || '';
-    if (!username || !password)
-	{
-	  res.status(401).json({error:"Invalid credentials"});
+    if (!username || !password) {
+      res.status(401).json({
+        error: "Invalid credentials"
+      });
       return;
-	}
+    }
 
-	// Fire a query to your DB and check if the credentials are valid
+    // Fire a query to your DB and check if the credentials are valid
     var dbUserObj = auth.validate(username, password, req);
-    if (!dbUserObj) { 
-		// If authentication fails, we send a 401 back
-		res.status(401).json({error:"Invalid credentials"});
+    if (!dbUserObj) {
+      // If authentication fails, we send a 401 back
+      res.status(401).json({
+        error: "Invalid credentials"
+      });
       return;
-	}else {
-		res.json(genToken(dbUserObj));
-	}
+    } else {
+      res.json(genToken(dbUserObj));
+    }
   },
 
 
   /*
-  * Refresh Token
-  */
+   * Refresh Token
+   */
   refreshToken: function(req, res) {
-	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'] || req.headers['authorization'];
-	if (token) {
-    try {
-      var decoded = jwt.decode(token, require('../auth/secret')());
-	  //more validation need
-		  if(!decoded.user.name || !decoded.user.token || !decoded.exp)
-		  {
-			res.status(401).json({error: 'Invalid Token'});  
-		  }else {
-			  if (decoded.exp <= Date.now()) {
-				res.status(401).json({error: 'Token Expired'});
-			  }else {
-				  var dbUser = auth.validate(decoded.user.name, decoded.user.token, req);
-				  if (!dbUser) { // If authentication fails, we send a 401 back
-					console.log("[Renewing Token]: Attack attempt detected!".red);
-					res.status(401).json({error: "Attack attempt detected!"});
-				  }else {
-					  res.json(genToken(dbUser));	  
-				  }
-			  }
-			}
-		}catch (err) {
-		  res.status(401).json({error: 'Invalid Token'});
-		}
-	}
+    var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'] || req.headers.authorization;
+    if (token) {
+      try {
+        var decoded = jwt.decode(token, require('../auth/secret')());
+        //more validation need
+        if (!decoded.user.name || !decoded.user.token || !decoded.exp) {
+          res.status(401).json({
+            error: 'Invalid Token'
+          });
+        } else {
+          if (decoded.exp <= Date.now()) {
+            res.status(401).json({
+              error: 'Token Expired'
+            });
+          } else {
+            var dbUser = auth.validate(decoded.user.name, decoded.user.token, req);
+            if (!dbUser) { // If authentication fails, we send a 401 back
+              console.log("[Renewing Token]: Attack attempt detected!".red);
+              res.status(401).json({
+                error: "Attack attempt detected!"
+              });
+            } else {
+              res.json(genToken(dbUser));
+            }
+          }
+        }
+      } catch (err) {
+        res.status(401).json({
+          error: 'Invalid Token'
+        });
+      }
+    }
   },
 
   //TODO:
-  validate: function(username, password, req){
+	validate: function(username, password, req, mcallback){
 		var db = req.maria;
+		async.waterfall([
+		  function(callback) {
 			db.getConnection(function(err, connection) {
-			  // Use the connection
-			  connection.query('SELECT 1+1', function (error, results, fields) {
-				// And done with the connection.
+			  connection.query('SELECT id, username, password FROM users WHERE username = ? AND locked = 0 AND active = 1',username, function(err, rows, fields) {
+				if (err){
+				  callback("Sql error");
+				}
 				connection.release();
+				callback(err, rows);
 
-				// Handle error after the release.
-				if (error) throw error;
-
-				// Don't use the connection here, it has been returned to the pool.
 			  });
-		});
-		//Bypass hack
-		return { "name": "123","token": "99999"};
-  },
+			});
 
-}
+		}
+	  ], function(err, result) {
+		  if (err || !result)
+			return res.json({status:"NOK", error:"Invalid data"});
+
+		  console.log("result: ",result);
+		});
+		return mcallback(result);
+	},
+};
 
 // Private methods
 function genToken(user) {
   var expires = expiresIn(1); // 1 day
   var token = jwt.encode({
     exp: expires,
-	user: user
+    user: user
   }, require('../auth/secret')());
 
   return {
