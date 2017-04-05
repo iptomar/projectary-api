@@ -2,6 +2,7 @@ var validator = require('validator'),
     bcrypt = require('bcrypt'),
     salt = require('../data/salt'),
     logger = require('../data/log');   // logs
+    uuidV4 = require('uuid/v4');	   // generate uuid
 
 
 var teacher = {
@@ -17,6 +18,7 @@ var teacher = {
   	var username = req.body.username;
   	var password = req.body.password;
   	var email = ((validator.isEmail(req.body.email)) ? req.body.email : null);
+  	var uuid = uuidV4();
 
     if(!username||!password||!email)
   	{
@@ -27,7 +29,7 @@ var teacher = {
           res.json({status:"NOK", error:"Error hashing password"});
 
         db.getConnection(function(err, c) {
-    		  c.query('CALL InsertNewUser(?,?,?,2,'')', username, hash, email, function(err,rows){
+    		  c.query('CALL InsertNewUser(?,?,?,2,?)', username, hash, email, uuid, function(err,rows){
     			  c.release();
             if(err){
               res.json({status:"NOK", error:"Error executing query"});
