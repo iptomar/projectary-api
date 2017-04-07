@@ -38,6 +38,8 @@ router.route('/project/:id')
 
 router.route('/project/')
   .post(ctrls.project.createProject) //3: Create a project
+
+router.route('/project/:approved')
   .get(ctrls.project.getProjectsLst) //4: Get project list
 
 router.get('/project/:id/applications', ctrls.project.getProjectApl) //5: Get applications list
