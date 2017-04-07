@@ -1,0 +1,29 @@
+{
+  "name": "projectari-api",
+  "version": "0.0.1",
+  "description": "Projectary API",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "keywords": [
+    "api",
+    "backend"
+  ],
+  "author": "IPT",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.2.0",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.0",
+    "colors": "^1.1.2",
+    "express": "^4.15.2",
+    "helmet": "^3.4.1",
+    "install": "^0.8.7",
+    "jwt-simple": "^0.5.1",
+    "mysql": "^2.13.0",
+    "npm": "^4.3.0",
+    "uuid": "^3.0.1"
+  }
+}
