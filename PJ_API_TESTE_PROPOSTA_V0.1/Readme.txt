@@ -29,6 +29,7 @@
 
 //API:
 //
+//Tratar da autenticação (finalizar)
 //Código assíncrono mal desenhado usar biblioteca async - waterfall, series, map, ...
 //Registo de dados multiplos funcionam mal excepto contactos que funciona 
 //provavel = codigo async mal desenhado
