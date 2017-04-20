@@ -14,7 +14,7 @@ $ npm install
 ## Start API Server
 ```bash
 $ cd {ABSOLUTE_PATH}\PJ_API
-$ npm start 
+$ npm start or node main.js if npm start not working
 ```
 
 ## Methods

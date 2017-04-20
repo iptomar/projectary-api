@@ -3,6 +3,14 @@
   "version": "0.0.1",
   "description": "Projectary API",
   "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "keywords": [
+    "api",
+    "backend"
+  ],
   "repository": "https://github.com/iptomar/projectary-api",
   "author": "IPT",
   "license": "MIT",
