@@ -10,7 +10,7 @@ var express = require('express'),
 var app = express();
 
 app.use(morgan(':req[x-forwarded-for] - :remote-addr - [:date] ":method :url HTTP/:http-version" :status :res[content-length]'));
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/../projectary-frontend/'));
 app.use(bodyParser({
   limit: '50mb'
 }));
@@ -21,7 +21,7 @@ routes(app);
 module.exports = {
   'app': app,
   'start': function(tenv) {
-    var port = process.env.PORT || 1337;
+    var port = process.env.PORT || 8080;
     var env = tenv || process.env.NODE_ENV;
 
     switch (env) {

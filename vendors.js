@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 
 var pool  = mysql.createPool({
-  host     : '127.0.0.1',
+  host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : '123qwe',
   database : 'projectary-master'
 });
 
