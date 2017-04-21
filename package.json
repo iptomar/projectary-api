@@ -1,0 +1,29 @@
+{
+  "name": "projectary-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iptomar/projectary-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iptomar/projectary-api/issues"
+  },
+  "homepage": "https://github.com/iptomar/projectary-api#readme",
+  "dependencies": {
+    "async": "^2.3.0",
+    "body-parser": "^1.17.1",
+    "colors": "^1.1.2",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0",
+    "progress": "^2.0.0"
+  }
+}
