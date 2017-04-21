@@ -28,11 +28,11 @@ apt-get install -q -y nodejs python-software-properties python g++ make software
 
 sudo /usr/bin/npm install -g forever tsc concurrently typescript
 
-cd /vagrant/projectary-api;
-/usr/bin/npm install;
+cd /vagrant/projectary-api
+/usr/bin/npm install
 
-cd /vagrant/projectary-frontend;
-/usr/bin/npm install;
+cd /vagrant/projectary-frontend
+/usr/bin/npm install
 
 cd /tmp
 wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
