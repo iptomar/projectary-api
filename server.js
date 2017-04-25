@@ -8,12 +8,12 @@ var express = require('express'),
   os = require("os");
 
 var app = express();
+var sizeLimit = '50mb';
 
 app.use(morgan(':req[x-forwarded-for] - :remote-addr - [:date] ":method :url HTTP/:http-version" :status :res[content-length]'));
 app.use(express.static(__dirname + '/../projectary-frontend/'));
-app.use(bodyParser({
-  limit: '50mb'
-}));
+app.use(bodyParser.urlencoded({ extended: true, limit: sizeLimit }));
+app.use(bodyParser.json({ limit: sizeLimit }));
 routes(app);
 
 
@@ -31,7 +31,7 @@ module.exports = {
       default:
     }
 
-    console.log('(SYSTEM) PTisp API'.green);
+    console.log('(SYSTEM) Projetary API'.green);
 
     var bar = new ProgressBar('(SYSTEM) Loading... [:bar] :percent :etas', {
       total: 40
