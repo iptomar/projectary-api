@@ -1,6 +1,5 @@
 Projectary API
 ==============
-## Installation
 Repository with the api code and vagrant file.
 
 ## Database
