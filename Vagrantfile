@@ -27,7 +27,7 @@ sudo /usr/bin/npm install -g forever tsc concurrently typescript
 cd /vagrant/projectary-api
 /usr/bin/npm install
 cd /vagrant/projectary-frontend
-/usr/bin/npm install
+/usr/bin/npm install --no-bin-links
 cd /tmp
 wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
 sudo mysql -u root -p123qwe -h localhost < projectary-bd-dump.sql
