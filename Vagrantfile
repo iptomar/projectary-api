@@ -27,7 +27,12 @@ sudo /usr/bin/npm install -g forever tsc concurrently typescript
 cd /vagrant/projectary-api
 /usr/bin/npm install
 cd /vagrant/projectary-frontend
-/usr/bin/npm install
+# em linux ou cli em modo de Administrador windows usar esta linhai
+/usr/bin/npm install 
+
+# em windows sem ser modo Administrador usar esta para não utilizar links simbolicos
+# /usr/bin/npm install --no-bin-links
+
 cd /tmp
 wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
 sudo mysql -u root -p123qwe -h localhost < projectary-bd-dump.sql
@@ -74,6 +79,9 @@ config.vm.network :forwarded_port, guest: 8080, host:8080
 ## configura um reencaminhamento da porta 3306 (MySQL) para a porta 33060 do host
 config.vm.network :forwarded_port, guest: 3306, host:33060
 
+## reencaminhamento de portas 3000 e 3001 para o host a pedido do André Santos
+config.vm.network :forwarded_port, guest:3000, host:3000
+config.vm.network :forwarded_port, guest:3001, host:3001
 end
 
 end
