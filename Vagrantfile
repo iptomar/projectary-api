@@ -24,6 +24,10 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update -q
 apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common
 sudo /usr/bin/npm install -g forever tsc concurrently typescript
+
+# instalar yarn 
+sudo npm install -g yarn
+
 cd /vagrant/projectary-api
 /usr/bin/npm install
 cd /vagrant/projectary-frontend
@@ -75,13 +79,13 @@ config.vm.provider :virtualbox do |vb, override|
 override.vm.provision :shell, :inline => $script
 
 ## configura um reencaminhamento de portas da porta 8080 para a 8080 do host
-config.vm.network :forwarded_port, guest: 8080, host:8080
+config.vm.network :forwarded_port, guest: 8080, host:8080, host_ip:"127.0.0.1"
 ## configura um reencaminhamento da porta 3306 (MySQL) para a porta 33060 do host
 config.vm.network :forwarded_port, guest: 3306, host:33060
 
 ## reencaminhamento de portas 3000 e 3001 para o host a pedido do André Santos
-config.vm.network :forwarded_port, guest:3000, host:3000
-config.vm.network :forwarded_port, guest:3001, host:3001
+config.vm.network :forwarded_port, guest:3000, host:3000, host_ip:"127.0.0.1"
+config.vm.network :forwarded_port, guest:3001, host:3001, host_ip:"127.0.0.1"
 end
 
 end
