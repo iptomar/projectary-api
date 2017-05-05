@@ -5,18 +5,20 @@ var express = require('express'),
   morgan = require('morgan'),
   routes = require('./lib/http/routes.js'),
   ProgressBar = require('progress'),
-  os = require("os");
+  os = require("os"),
+  cors = require('cors');
 
 var app = express();
 var sizeLimit = '50mb';
+
+// required by frontend
+app.use(cors());
 
 app.use(morgan(':req[x-forwarded-for] - :remote-addr - [:date] ":method :url HTTP/:http-version" :status :res[content-length]'));
 app.use(express.static(__dirname + '/../projectary-frontend/'));
 app.use(bodyParser.urlencoded({ extended: true, limit: sizeLimit }));
 app.use(bodyParser.json({ limit: sizeLimit }));
 routes(app);
-
-
 
 module.exports = {
   'app': app,
