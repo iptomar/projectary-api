@@ -81,7 +81,7 @@ override.vm.provision :shell, :inline => $script
 ## configura um reencaminhamento de portas da porta 8080 para a 8080 do host
 config.vm.network :forwarded_port, guest: 8080, host:8080, host_ip:"127.0.0.1"
 ## configura um reencaminhamento da porta 3306 (MySQL) para a porta 33060 do host
-config.vm.network :forwarded_port, guest: 3306, host:33060
+config.vm.network :forwarded_port, guest: 3306, host:33060, host_ip:"127.0.0.1"
 
 ## reencaminhamento de portas 3000 e 3001 para o host a pedido do André Santos
 config.vm.network :forwarded_port, guest:3000, host:3000, host_ip:"127.0.0.1"
