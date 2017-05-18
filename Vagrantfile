@@ -34,7 +34,7 @@ cd /vagrant/projectary-frontend
 # em linux ou cli em modo de Administrador windows usar esta linhai
 /usr/bin/npm install 
 
-# em windows sem ser modo Administrador usar esta para não utilizar links simbolicos
+# em windows sem ser modo Administrador usar esta para nao utilizar links simbolicos
 # /usr/bin/npm install --no-bin-links
 
 cd /tmp
@@ -42,13 +42,13 @@ wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-b
 sudo mysql -u root -p123qwe -h localhost < projectary-bd-dump.sql
 
 # alterar o bind-adress para permitir acesso a partir do host via workbench
-echo "Atualizando o ficheiro de configuraçao do mysql em /etc/mysql/mysql.conf.d/mysqld.cnf"
+echo "Atualizando o ficheiro de configuracao do mysql em /etc/mysql/mysql.conf.d/mysqld.cnf"
 sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "Atualizado o bind-address de 127.0.0.1 para 0.0.0.0"
 sudo service mysql restart
 
-# para permitir ligação ao mysql a partir de qualquer host
-# retirar quando não em desenvolvimento já que é uma falha de segurança
+# para permitir ligacao ao mysql a partir de qualquer host
+# retirar quando nao em desenvolvimento ja que e uma falha de seguranca
 mysql -uroot -p123qwe -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123qwe'; FLUSH PRIVILEGES;"
 
 SCRIPT
@@ -68,7 +68,7 @@ Vagrant.configure("2") do |config|
 
 config.vm.box="ubuntu/xenial64"
 
-# especificar forçando, a versao da box
+# especificar forcando, a versao da box
 # config.vm.box_version="1.1.0"
 # tambem se pode especificar o url da box usando o comando
 # config.vm.box_url = "http://files.vagrantup.com/precise64.box"
@@ -83,7 +83,7 @@ config.vm.network :forwarded_port, guest: 8080, host:8080, host_ip:"127.0.0.1"
 ## configura um reencaminhamento da porta 3306 (MySQL) para a porta 33060 do host
 config.vm.network :forwarded_port, guest: 3306, host:33060, host_ip:"127.0.0.1"
 
-## reencaminhamento de portas 3000 e 3001 para o host a pedido do André Santos
+## reencaminhamento de portas 3000 e 3001 para o host a pedido do Andre Santos
 config.vm.network :forwarded_port, guest:3000, host:3000, host_ip:"127.0.0.1"
 config.vm.network :forwarded_port, guest:3001, host:3001, host_ip:"127.0.0.1"
 end
