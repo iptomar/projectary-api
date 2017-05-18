@@ -13,7 +13,7 @@ if [ -z "$user" ]; then
 fi
 
 apt-get update -q
-apt-get install -q -y apt-transport-https ca-certificates git mysql-testsuite
+apt-get install -q -y apt-transport-https ca-certificates git
 chown ubuntu:ubuntu -R /home/ubuntu/
 export DEBIAN_FRONTEND=noninteractive
 debconf-set-selections <<< "mysql-server mysql-server/root_password password 123qwe"
@@ -22,7 +22,7 @@ apt-get update -q
 apt-get install -q -y mysql-server
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update -q
-apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common
+apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common mysql-testsuite
 sudo /usr/bin/npm install -g forever tsc concurrently typescript
 
 # instalar yarn 
