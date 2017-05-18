@@ -13,7 +13,7 @@ if [ -z "$user" ]; then
 fi
 
 apt-get update -q
-apt-get install -q -y apt-transport-https ca-certificates git
+apt-get install -q -y apt-transport-https ca-certificates git mysql-testsuite
 chown ubuntu:ubuntu -R /home/ubuntu/
 export DEBIAN_FRONTEND=noninteractive
 debconf-set-selections <<< "mysql-server mysql-server/root_password password 123qwe"
