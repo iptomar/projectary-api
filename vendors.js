@@ -4,7 +4,8 @@ var pool  = mysql.createPool({
   host     : 'localhost',
   user     : 'root',
   password : '123qwe',
-  database : 'projectary-master'
+  database : 'projectary-master',
+  multipleStatements: true
 });
 
 module.exports = {
