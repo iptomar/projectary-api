@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "forever start main.js; cd ../projectary-tests; npm run api-test",
     "start": "node main.js",
-    "frontend": "forever start main.js; cd ../projectary-frontend; tsc && concurrently \"tsc -w\" "
+    "frontend": "forever start main.js; cd ../projectary-frontend; npm run start"
   },
   "repository": {
     "type": "git",
