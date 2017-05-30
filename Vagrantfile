@@ -37,6 +37,9 @@ cd /vagrant/projectary-frontend
 # em windows sem ser modo Administrador usar esta para nao utilizar links simbolicos
 # /usr/bin/npm install --no-bin-links
 
+# instalar o nginx. por defeito irá ficar na porta 80, que será redirecionada para a 10000
+sudo apt-get -y install nginx
+
 cd /tmp
 wget https://raw.githubusercontent.com/iptomar/projectary-bd/master/projectary-bd-dump.sql
 sudo mysql -u root -p123qwe -h localhost < projectary-bd-dump.sql
@@ -86,6 +89,9 @@ config.vm.network :forwarded_port, guest: 3306, host:33060, host_ip:"127.0.0.1"
 ## reencaminhamento de portas 3000 e 3001 para o host a pedido do Andre Santos
 config.vm.network :forwarded_port, guest:3000, host:3000, host_ip:"127.0.0.1"
 config.vm.network :forwarded_port, guest:3001, host:3001, host_ip:"127.0.0.1"
+
+config.vm.network :forwarded_port, guest: 80, host:10000, host_ip:"127.0.0.1"
+
 end
 
 end
