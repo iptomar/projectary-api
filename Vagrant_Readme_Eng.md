@@ -1,4 +1,4 @@
-Update 29-05-2017 19:58
+ï»¿Update 29-05-2017 19:58
 
 - The vagrant file will create a virtual machine with MySql and nodejs
 - Install Virtualbox (the virtual machine will be set up in Virtualbox, but you don't have to open Virtualbox to run it)
@@ -23,8 +23,7 @@ Update 29-05-2017 19:58
 - if you'd like to remove the virtual machine (to free up some space or so), do "vagrant destroy", the Vagrantfile will remain at the folder
   and when you call "vagrant up", a new machine will be created, however, all data you have within the virtual machine (not shared between the
   host and guest), will be lost. Pay attention to this.
- -Se quiser remover definitivamente a máquina virtual, fazer "vagrant box remove ubuntu/xenial64" (vagrant box remove nome_da_maquina)
- - If you want to remove the virtual machine definetly, do "vagrant box remove ubuntu/xenial64" (or generic "vagrant box remove machine_name")
+- If you want to remove the virtual machine definetly, do "vagrant box remove ubuntu/xenial64" (or generic "vagrant box remove machine_name")
  
 
 - Mysql Installed
