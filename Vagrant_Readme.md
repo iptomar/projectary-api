@@ -1,4 +1,4 @@
-Atualização de 25-04-2017 19:48
+Atualização de 29-05-2017 19:58
 
 -A vagrant file irá criar uma máquina virtual com mysql e nodejs
 -Instalar o Vagrant de https://www.vagrantup.com/downloads.html
@@ -21,11 +21,13 @@ Atualização de 25-04-2017 19:48
 
 - Mysql Instalado
 - node js instalado
+- yarn instalado (pode ser utilizado em vez do npm)
 - alteradas credenciais do root do mysql para a password '123qwe'
 - alterados os hosts com permissão para aceder ao mysql para todos (%)
 - alterado o bind-address do mysql para 0.0.0.0 e permitir ligação a partir de outros hosts
 - portas redirecionadas : 8080 -> 8080 (backend api), 3306 -> 33060 (mysql)
 - portas redirecionadas : 3000 -> 3000 e 3001 -> 3001 (frontend)
+- portas redirecionadas : 80 -> 10000 (nginx - testes)
 - existe uma linha comentada de não utilização de links simbolicos para quem tiver problemas em 
   linha de comandos de windows (de acordo com o André apenas em modo normal, em modo de Admin não dá erro)
 
@@ -42,3 +44,9 @@ ou
 yarn run frontend
 
 e no host aceder a http://127.0.0.1:8080
+
+- Se pretenderem alterar a porta 80 do servidor nginx, o ficheiro de configuração está em 
+  /etc/nginx/sites-enabled e se estiver a utilizar a configuração por defeito, existe um ficheiro de nome "default"
+  nesta pasta. Editar o ficheiro e alterar a porta 80 na directiva server{} para a porta pretendida. 
+  É depois necessário alterar o ficheiro Vagrantfile para que o mapeamento coincida com a nova porta e 
+  reiniciar o serviço na maquina virtual (sudo service nginx restart)
