@@ -3,7 +3,7 @@ var mysql = require('mysql'),
 
 var pool = mysql.createPool({
   host: 'localhost',
-  user: 'root2',
+  user: 'root',
   password: '123qwe',
   database: 'projectary-master'
 });
