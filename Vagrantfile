@@ -25,14 +25,14 @@ apt-get update -q
 apt-get install -q -y nodejs python-software-properties python g++ make software-properties-common mysql-testsuite
 sudo /usr/bin/npm install -g forever tsc concurrently typescript
 
-# instalar yarn 
+# instalar yarn
 sudo npm install -g yarn
 
 cd /vagrant/projectary-api
 /usr/bin/npm install
 cd /vagrant/projectary-frontend
 # em linux ou cli em modo de Administrador windows usar esta linhai
-/usr/bin/npm install 
+/usr/bin/npm install
 
 # em windows sem ser modo Administrador usar esta para nao utilizar links simbolicos
 # /usr/bin/npm install --no-bin-links
@@ -86,9 +86,9 @@ config.vm.network :forwarded_port, guest: 8080, host:8080, host_ip:"127.0.0.1"
 ## configura um reencaminhamento da porta 3306 (MySQL) para a porta 33060 do host
 config.vm.network :forwarded_port, guest: 3306, host:33060, host_ip:"127.0.0.1"
 
-## reencaminhamento de portas 3000 e 3001 para o host a pedido do Andre Santos
-config.vm.network :forwarded_port, guest:3000, host:3000, host_ip:"127.0.0.1"
-config.vm.network :forwarded_port, guest:3001, host:3001, host_ip:"127.0.0.1"
+## reencaminhamento de portas 4200 e 4201 para o host a pedido do Andre Santos
+config.vm.network :forwarded_port, guest:4200, host:4200, host_ip:"127.0.0.1"
+config.vm.network :forwarded_port, guest:4201, host:4201, host_ip:"127.0.0.1"
 
 config.vm.network :forwarded_port, guest: 80, host:10000, host_ip:"127.0.0.1"
 
