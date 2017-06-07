@@ -9,22 +9,23 @@ var pool = mysql.createPool({
 });
 
 var email = {
-  'smtp': '127.0.0.1',
-  'user': 'example@contoso.com',
-  'password': 'contosoPass'
+  'smtp': 'in-v3.mailjet.com',
+  'user': 'f1c4d17ec2d636ed3404af87f5940f8c',
+  'password': 'aba4659d857c143d3d1d7125a76deac0'
 };
 
 var sendMessage = function(message, destination, subject, from, callback) {
   var connection = emailjs.server.connect({
     user: email.user,
     password: email.password,
-    host: email.smtp
+    host: email.smtp,
+    port: 25
   });
 
   connection.send({
     text: message,
     'reply-to': from || email.user,
-    from: from || email.user,
+    from: 'throwawaypsi@gmail.com',
     to: destination,
     subject: subject || 'Projetary'
   }, function(err, message) {
