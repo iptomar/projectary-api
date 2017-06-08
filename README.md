@@ -1,6 +1,9 @@
 Projectary API
 ==============
-Repository with the api code and vagrant file.
+Repository with the projectary api code and vagrant file development environment.
+
+## Requirements analysis
+The requirements analysis can be found [here](https://github.com/iptomar/projectary-as)
 
 ## Database
 The database can be found [here](https://github.com/iptomar/projectary-bd)
@@ -12,3 +15,6 @@ The frontend can be found [here](https://github.com/iptomar/projectary-frontend)
 The Vagrantfile documentation in English can be found [here](https://github.com/iptomar/projectary-api/wiki/Vagrant-EN)
 
 The Vagrantfile documentation in Portuguese can be bound [here](https://github.com/iptomar/projectary-api/wiki/Vagrant-PT)
+
+## Tests
+The tests can be found [here](https://github.com/iptomar/projectary-tests)
