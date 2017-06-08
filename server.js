@@ -11,8 +11,7 @@ var express = require('express'),
 var app = express();
 var sizeLimit = '50mb';
 
-// required by frontend
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
 
 app.use(morgan(':req[x-forwarded-for] - :remote-addr - [:date] ":method :url HTTP/:http-version" :status :res[content-length]'));
 app.use(express.static(__dirname + '/../projectary-frontend/'));
