@@ -1,6 +1,10 @@
 Projectary API
 ==============
 Repository with the projectary api code and vagrant file development environment.
+==============
+## Api Documentation
+The api documentation can be found [here](https://github.com/iptomar/projectary-api/wiki)
+==============
 
 ## Requirements analysis
 The requirements analysis can be found [here](https://github.com/iptomar/projectary-as)
