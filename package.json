@@ -20,6 +20,7 @@
   "homepage": "https://github.com/iptomar/projectary-api#readme",
   "dependencies": {
     "async": "^2.3.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "colors": "^1.1.2",
     "cors": "^2.8.3",
